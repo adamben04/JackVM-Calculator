@@ -1,43 +1,48 @@
-# Calculator in Jack  
+# JackVM Calculator 🧮
 
-This project implements a calculator using **Jack**, a simple object-oriented programming language similar to Java, developed as part of the Nand2Tetris curriculum.  
 
-## Requirements  
-To run this calculator, you need tools from the open-source **Nand2Tetris textbook**. Download them here:  
-[Download Nand2Tetris Tools](https://drive.google.com/file/d/1xZzcMIUETv3u3sdpM_oTJSTetpVee3KZ/view)  
+A comprehensive calculator system built from the ground up, featuring arbitrary-precision arithmetic and direct hardware interfacing. The implementation spans from high-level object-oriented design in Jack to low-level 8085 assembly optimizations.
+## Technical Architecture
 
-### Tools Needed:  
-1. **VMEmulator** - Executes the compiled virtual machine code.  
-2. **JackCompiler** - Converts Jack code into VM code.  
+### Core Components
+- **Virtual Machine Implementation**: Custom VM translator targeting 8085 assembly
+- **Memory Management**: Optimized heap allocation system starting at 4100h
+- **I/O System**: Memory-mapped keyboard scanning (8010-8013h) and display output (8000-8007h)
+- **Timing Control**: Precision one-second delay implementation for real-time operations
 
-## Features  
-The calculator uses **Reverse Polish Notation (RPN)** for input, functioning like a stack-based system. Below is a list of available operations and their triggers:  
+### Hardware Interface
+| Component | Memory Address | Function |
+|-----------|---------------|-----------|
+| Display Output | 8000-8007h | Seven-segment display control |
+| Keyboard Input | 8010-8013h | Real-time key scanning |
+| Stack Init | 40FFh | Initial stack pointer location |
+| Heap Management | 4100h | Dynamic memory allocation |
 
-### Basic Operations  
-- **Addition (`+`)**: Pops the top two numbers, adds them, and pushes the result.  
-- **Subtraction (`-`)**: Pops the top two numbers, subtracts, and pushes the result.  
-- **Multiplication (`*`)**: Pops two numbers, multiplies them, and pushes the result.  
-- **Division (`/`)**: Pops two numbers, divides, and pushes the result.  
+## Key Features
 
-### Advanced Functions  
-- **Exponential (`W`)**: Pops one number, `x`, and pushes `e^x`.  
-- **Natural Log (`L`)**: Computes the natural log of the top number and pushes the result.  
-- **Root (`R`)**: Pops two numbers, `x` and `y`, and pushes `x^(1/y)`.  
-- **Power (`^`)**: Pops two numbers, `x` and `y`, and pushes `x^y`.  
-- **Trigonometric Functions**:  
-  - **Sine (`S`)**: Computes `sin(x)` for the top number.  
-  - **Cosine (`C`)**: Computes `cos(x)` for the top number.  
-  - **Tangent (`T`)**: Computes `tan(x)` for the top number.  
+### Mathematical Operations
+- **RPN Calculator**: Stack-based Reverse Polish Notation
+- **Basic Operations**: Addition, Subtraction, Multiplication, Division
+- **Advanced Functions**: Exponential, Natural Log, Root, Power
+- **Trigonometric Functions**: Sine, Cosine, Tangent
+- **Constants**: Pi (P) and e (E)
 
-### Constants and Precision  
-- **Pi (`P`)** and **e (`E`)** are preloaded constants.  
-- Results are returned with precision controlled by the variable `precision` (default: 16).  
+### System Design
+- **Memory Efficiency**: Custom heap allocation with garbage collection
+- **Real-time Processing**: Optimized keyboard scanning algorithm
+- **Display Management**: Efficient seven-segment refresh system
+- **Timing Control**: Calibrated one-second delay routines
 
-## Additional Notes  
-- **Custom Arithmetic**: Multiplication and division are implemented using repeated addition and subtraction (no external libraries).  
-- **Mathematical Approximations**: Advanced functions use summation approximations and may exhibit minor variations for larger numbers.  
-- **Hardware Limitations**:  
-  - Designed to run on an Intel 8085 microprocessor with 64KB of RAM.  
-  - Performance may be slower compared to modern calculators.  
+## Implementation Details
 
-This project highlights the challenges and ingenuity of building a functional calculator within constrained hardware environments and using low-level computational tools.  
+### Assembly Optimizations
+- Precise timing calibration for consistent one-second delays
+- Efficient keyboard debouncing implementation
+- Optimized display refresh cycles
+- Direct memory-mapped I/O handling
+
+### Core Algorithms
+- Stack-based expression evaluation
+- Arbitrary precision arithmetic
+- Real-time I/O processing
+- Memory-efficient string handling
