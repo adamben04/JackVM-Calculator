@@ -1,0 +1,42 @@
+# Compiled files
+*.vm
+*.class
+*.hack
+*.lst
+*.sym
+compiled/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Backup files
+*~
+*.bak
+*.backup
+*.old
+
+# Build and temporary files
+bin/
+build/
+temp/
+tmp/
+
+# Project specific
+tools/bin/
+tools/builtInChips/
+tools/builtInVMCode/
+tools/os/
