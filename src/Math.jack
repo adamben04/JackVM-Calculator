@@ -1,0 +1,686 @@
+class Math{
+	// Initialize the constants pi, e, delta, and c as ArbNums
+	static ArbNum pi, e, c0, c1, c2, c3, delta;
+	
+	function void init(){
+		do ArbNum.init();
+		// Set the values of pi, e, delta, c0, c1, and c2 using their decimal representations
+		let pi = ArbNum.new("3.1415926535897932384626433832795");
+		let e = ArbNum.new("2.718281828459045");
+		let delta = ArbNum.new("0.000000000001");
+		let c0 = ArbNum.new("0.0");
+		let c1 = ArbNum.new("1.0");
+		let c2 = ArbNum.new("2.0");
+		let c3 = ArbNum.new("3.0");
+		return;
+	}
+	
+	// GETTER FUNCTIONS
+	
+	function ArbNum getpi(){
+		return ArbNum.copy( pi );
+	}
+
+	function ArbNum gete() {
+		return ArbNum.copy( e );
+	}
+	
+	function ArbNum getdelta() {
+		return ArbNum.copy( delta );
+	}
+
+	// MATH FUNCTIONS
+	
+	function ArbNum add(ArbNum x, ArbNum y){
+		// Create copy of each arbNums
+		// Calculate the sign of the results		
+		// Adjust the offset, and shift Right/Left accordingly
+		// Call ArrayAdd once
+		// Return the sum
+		var ArbNum a, b, ret;
+		var bool isRev;	
+		
+		let a = ArbNum.copy(x);
+		let b = ArbNum.copy(y);
+		let isRev = false;
+		
+		if (a.getSign() & b.getSign()){
+			do a.setSign(true);
+		}
+		if ( a.getSign() & (~( b.getSign() )) ){
+			do a.setSign(false);
+			let ret = Math.sub(b, a);
+			// LINE BELOW USED OT SAY a.setSign, 6/11, CHANGE BACK IF BROKEN
+			// LINE BELOW USED OT SAY a.setSign, 6/11, CHANGE BACK IF BROKEN
+			// LINE BELOW USED OT SAY a.setSign, 6/11, CHANGE BACK IF BROKEN
+			// LINE BELOW USED OT SAY a.setSign, 6/11, CHANGE BACK IF BROKEN
+			do a.setSign(true);
+			do ArbNum.dispose(a);
+			do ArbNum.dispose(b);
+			return ret;
+		}
+		if ( ~(a.getSign()) & b.getSign() ) {
+			do b.setSign(false);
+			let ret = Math.sub(a, b);
+			do b.setSign(true);
+			do ArbNum.dispose(a);
+			do ArbNum.dispose(b);
+			return ret;
+		}
+		
+		while (a.getOffset() > b.getOffset()){
+			do a.shiftRight();
+		}
+		while (a.getOffset() < b.getOffset()){
+			do b.shiftRight();
+		}
+		
+		do a.arrayAdd(b);
+		
+		if (isRev) {
+			do a.setSign(true);
+		}
+		
+		do ArbNum.dispose(b);
+		
+		return a;
+	}
+	
+	function ArbNum sub(ArbNum x, ArbNum y){
+		var ArbNum diff, b, temp;
+		var bool isRev;
+		
+		let diff = ArbNum.copy(x);
+		let b = ArbNum.copy(y);
+		let isRev = false;
+		
+		if(diff.getSign() & b.getSign()){
+			//do Output.println();
+			do diff.setSign(false);
+			do b.setSign(false);
+			let temp = Math.sub(b, diff);
+			do ArbNum.dispose(diff);
+			do ArbNum.dispose(b);
+			return temp;
+		}
+
+		if(diff.getSign()){
+			//do Output.println();
+			do b.setSign(true);
+			let temp = Math.add(diff ,b);
+			do ArbNum.dispose(diff);
+			do ArbNum.dispose(b);
+			return temp;
+		}
+
+		if(b.getSign()){
+			//do Output.println();
+			do b.setSign(false);
+			let temp = Math.add(diff, b);
+			do temp.setSign(true);
+			do ArbNum.dispose(diff);
+			do ArbNum.dispose(b);
+			return temp;
+		}
+		if(b.isGreater(diff)){
+			//do Output.println();
+			let temp = Math.sub(b, diff);
+			do temp.setSign(true);
+			do ArbNum.dispose(diff);
+			do ArbNum.dispose(b);
+			return temp;
+		}
+				
+		while(diff.getOffset() > b.getOffset()){ 
+			do diff.shiftRight();
+		}
+		while(b.getOffset()>diff.getOffset()){
+			do b.shiftRight();
+		}
+
+		do diff.arraySub(b);
+		
+		if(isRev){
+			do diff.setSign(~(diff.getSign()));
+		}
+		
+		do ArbNum.dispose(b);
+		
+		return diff;
+	}
+	
+	function ArbNum mul(ArbNum x, ArbNum y){
+		//make copies of this and that
+		var ArbNum a, product, tmp;
+		var int i, j;
+		var Array bDigits;
+		
+		if(x.isEqual(c0) | y.isEqual(c0)) {
+			return ArbNum.copy(c0);
+		}
+	
+		let a = ArbNum.copy(x);
+		
+		let bDigits = y.getDigits();
+		
+		// Value that will store the answer
+		let product = ArbNum.copy( c0 );
+		
+		do a.setSign(~( a.getSign()=y.getSign() ));
+		
+		do product.setSign(a.getSign());
+		
+		let j = ArbNum.getPrecision();
+		do a.setOffset(a.getOffset() + y.getOffset() + 1 - j);
+		
+		while(j > 0 ){
+				let j = j-1;
+				let i = bDigits[j];
+				while(i > 0){
+					let i = i - 1;
+					let tmp = Math.add(product, a);
+					do ArbNum.dispose(product);
+					let product = tmp;
+				}
+				do a.div10();
+		}
+		do ArbNum.dispose(a);
+
+		return product;
+	}
+	
+	
+	function ArbNum div(ArbNum x, ArbNum y){
+		var ArbNum quotient, c, d, temp;
+		var int i, j, precision;
+		var Array cDigits, qDigits;
+		
+		// Check for error condition
+		if(y.isEqual(c0)){
+			do Sys.error(3);
+		}
+	
+		// Check if x is 0, return 0
+		if(x.isEqual(c0)){
+			return ArbNum.copy(c0);
+		}
+	
+		let c = ArbNum.copy(x);
+		let d = ArbNum.copy(y);
+		
+		let quotient = ArbNum.copy( c0 );
+		
+		let qDigits = quotient.getDigits();
+
+		let precision = ArbNum.getPrecision();
+								
+		do quotient.setSign( ~( c.getSign() = d.getSign() ) );
+		
+		do c.setSign(false);
+		do d.setSign(false);
+
+		if((d.getOffset() = precision) | (c.getOffset() = precision)){
+			do d.setOffset(d.getOffset() - 1);
+			do c.setOffset(c.getOffset() - 1);
+		}
+		let precision = precision - 1;
+		while(( d.getOffset() < precision ) & ( c.getOffset() < precision )){
+			do d.setOffset(d.getOffset() + 1);
+			do c.setOffset(c.getOffset() + 1);
+		}
+		let cDigits = d.getDigits();
+		while(cDigits[precision] = 0){
+			do d.mul10();
+			do c.setOffset(c.getOffset() - 1);
+		}
+
+		do quotient.setOffset(c.getOffset());
+		do c.setOffset(precision);
+		
+		let cDigits = c.getDigits();
+		let qDigits = quotient.getDigits();
+
+		let i = precision + 1;
+		while((i > 0) ) {
+			let i = i - 1;
+			while(c.isGreater(d) | c.isEqual(d)){
+				let temp = Math.sub(c, d);
+				do ArbNum.dispose(c);
+				let c = temp;
+				let cDigits = c.getDigits();
+				let qDigits[i] = qDigits[i] + 1;
+			}
+			
+			if(cDigits[precision] = 0){
+				do c.shiftLeft();
+			}
+			
+			do c.setOffset(c.getOffset()-1);
+			
+			if( (i = (precision)) & (qDigits[i] = 0)){
+				do quotient.setOffset(quotient.getOffset()+1);
+				let i = i + 1;
+			}
+		}
+		
+		let precision = precision+1;
+		while(quotient.getOffset() > precision){
+			do quotient.shiftRight();
+		}
+		while((quotient.getOffset() < precision) & (qDigits[precision - 1] = 0)){
+			do quotient.shiftLeft();
+		}
+		
+		do ArbNum.dispose(c);
+		do ArbNum.dispose(d);
+
+		return quotient;
+	}
+	
+	// ADVANCED MATH FUNCTIONS
+	
+	// Calculates the exponential of a given ArbNum x, using the Taylor series
+	function ArbNum exp(ArbNum x){
+		// Takes e^x, and returns e^x
+		// using taylor series 
+		var ArbNum sum, temp, I, term, inter;
+		
+		//if(x.getSign()){
+		//	do x.setSign(false);
+		//	let temp = Math.exp(x);
+		//	let sum = Math.div(c1,temp);
+		//	do ArbNum.dispose(temp);
+		//	return sum;
+		//}
+		
+		// special cases (e^0, e^1)
+		if(x.isEqual(c0)){
+			return ArbNum.copy(c1);
+		}
+		if(x.isEqual(c1)){
+			return ArbNum.copy(e);
+		}
+		
+		let sum = Math.add(x, c1);
+		let term = ArbNum.copy(x);
+		let I = ArbNum.copy(c1);
+
+		while(term.isGreater(delta)){
+			let temp = Math.add(I, c1);
+			do ArbNum.dispose(I);
+			let I = temp;
+			
+			let inter = Math.div(x,I);
+			let temp = Math.mul(term, inter );
+			do ArbNum.dispose(term);
+			let term = temp;
+			
+			do ArbNum.dispose(inter);
+			
+			let temp = Math.add(sum, term);
+			do ArbNum.dispose(sum);
+			let sum = temp;
+		}
+		
+		do ArbNum.dispose(I);
+		do ArbNum.dispose(term);
+		return sum;
+	}
+	
+	function ArbNum ln(ArbNum x){
+		//polynomial series
+		var ArbNum p, square, term, sum, temp, I, rem, acc;
+
+		if(x.isEqual(c0) | x.getSign()){
+			do Sys.error(22);
+		}
+		
+		if(x.isEqual(c1)){
+			return ArbNum.copy(c0);
+		}
+		
+		if(x.isEqual(e)){
+			return ArbNum.copy(c1);
+		}
+
+		let rem = ArbNum.copy(x);
+		let acc = ArbNum.copy(c0);
+		
+		while (rem.isGreater(e) | rem.isEqual(e)) {
+			let temp = Math.div(rem, e);
+			do ArbNum.dispose(rem);
+			let rem = temp;
+			let temp = Math.add(acc, c1);
+			do ArbNum.dispose(acc);
+			let acc = temp;
+		}
+
+		//do ArbNum.dispose(temp1);
+		//do ArbNum.dispose(temp);
+		//do ArbNum.dispose(rem);
+		
+		let p = Math.add(rem,c1);
+		let temp = Math.sub(rem, c1);
+		let sum = Math.div(temp,p);
+		
+		do ArbNum.dispose(p);
+		do ArbNum.dispose(temp);
+		do ArbNum.dispose(rem);
+		
+		let p = ArbNum.copy(sum);
+		
+		let square = Math.mul(sum,sum);
+		//do Main.printNum(square);
+
+		let I = ArbNum.copy(c1);
+		// initialize term just for while loop to work
+		let term = ArbNum.copy(c1);
+
+		// From here afterwards, this takes care of n=1, and future
+		while(term.isGreater(delta)){
+			do ArbNum.dispose(term);
+
+			//DEBUGGING
+			
+			let temp = Math.add(I,c2);
+			do ArbNum.dispose(I);
+			let I = temp;
+			
+			let temp = Math.mul(p,square);
+			do ArbNum.dispose(p);
+			let p = temp;
+			
+			let term = Math.div(p, I);
+
+			let temp = Math.add(sum,term);
+			do ArbNum.dispose(sum);
+			let sum = temp;
+		}
+
+		let rem = Math.mul(sum,c2);
+		let temp = Math.add(rem,acc);
+		
+		do ArbNum.dispose(term);
+		do ArbNum.dispose(p);
+		do ArbNum.dispose(sum);
+		do ArbNum.dispose(acc);
+		do ArbNum.dispose(I);
+		do ArbNum.dispose(square);
+		do ArbNum.dispose(rem);
+		
+		return temp;
+	}
+	
+	function ArbNum pow(ArbNum x, ArbNum y){
+		var ArbNum temp, y2, result, logx;
+	
+		if(x.isEqual(c0)){
+			return ArbNum.copy(c0);
+		}
+		if(y.isEqual(c0)){
+			return ArbNum.copy(c1);
+		}
+		if(x.isEqual(c1)){
+			return ArbNum.copy(c1);
+		}
+		if(y.isEqual(c1)){
+			return ArbNum.copy(x);
+		}
+		
+		if(x.getSign()){
+			do x.setSign(false);
+			
+			if(~(ArbNum.isWholeNum(y))){
+				return null;
+			}
+			
+			if(ArbNum.isEven(y)){
+				return Math.pow(x,y);
+			}
+			
+			let result = Math.pow(x,y);
+			do result.setSign(true);
+			
+			return result;
+		}
+		
+		let y2 = ArbNum.copy(y);
+		
+		if(y2.getSign()){
+			do y2.setSign(false);
+			
+			let temp = Math.pow(x,y2);
+			let result = Math.div(c1, temp);
+			do ArbNum.dispose(temp);
+			return result;
+		}
+		
+		let result = ArbNum.copy(c1);
+		
+		while(y2.isGreater(c1) | y2.isEqual(c1)){
+			let temp = Math.mul(result, x);
+			do ArbNum.dispose(result);
+			let result = temp;
+			
+			let temp = Math.sub(y2, c1);
+			do ArbNum.dispose(y2);
+			let y2 = temp;
+		}
+		
+		let logx = Math.ln(x);
+		let temp = Math.mul(y2, logx);
+		do ArbNum.dispose(logx);
+		do ArbNum.dispose(y2);
+		let y2 = temp;
+		let temp = Math.exp(y2);
+		do ArbNum.dispose(y2);
+		let y2 = temp;
+		let temp = Math.mul(result, y2);
+		do ArbNum.dispose(y2);
+		do ArbNum.dispose(result);
+		return temp;
+	}
+	
+	function ArbNum root(ArbNum x, ArbNum y){
+		var ArbNum temp, result;
+		if(x.getSign() & ~(y.isEqual(c1))){
+			do Sys.error(4);
+		}
+		let temp = Math.div(c1,y);
+		let result = Math.pow(x, temp);
+		do ArbNum.dispose(temp);
+		return temp;
+	}
+	
+	function ArbNum cos(ArbNum x){
+		var ArbNum pi2, consty, factorialNum, inter, term, result, temp;
+		
+		//if(x.isEqual(pi)){
+			//return Math.sub(c0,c1);
+		//}
+		
+		let pi2 = Math.mul(pi, c2);
+		do pi2.setSign(x.getSign());
+		
+		let consty = ArbNum.copy(x);
+		
+		while(consty.isGreater(pi2) | consty.isEqual(pi2) ){
+			let temp = Math.sub(consty,pi2); 
+			do ArbNum.dispose(consty);
+			let consty = temp;
+			
+			//do Output.printString("consty: ");
+			//do Main.printNum(consty);
+			//do Output.println();
+			//do Sys.wait(1000);
+		}
+		
+		//do Output.printString("consty: ");
+		//do Main.printNum(consty);
+		//do Output.println();
+		//do Sys.wait(2000);
+		
+		let temp = Math.div(pi,c2);
+		let inter = Math.div(consty,temp);
+		
+		//do Output.printString("temp: ");
+		//do Main.printNum(temp);
+		//do Output.println();
+		//do Sys.wait(2000);
+		
+		//do Output.printString("inter: ");
+		//do Main.printNum(inter);
+		//do Output.println();
+		//do Sys.wait(2000);
+		
+		if(inter.isEqual(c1) | inter.isEqual(c3) ){
+			do ArbNum.dispose(consty);
+			do ArbNum.dispose(temp);
+			do ArbNum.dispose(inter);
+			return ArbNum.copy(c0);
+		}
+		if(inter.isEqual(c2)){
+			do ArbNum.dispose(consty);
+			do ArbNum.dispose(temp);
+			do ArbNum.dispose(inter);
+			return Math.sub(c0,c1);
+		}
+		
+		if(consty.isEqual(c0)){
+			do ArbNum.dispose(consty);
+			do ArbNum.dispose(temp);
+			do ArbNum.dispose(inter);
+			return ArbNum.copy(c1);
+		}
+		
+		do ArbNum.dispose(temp);
+		do ArbNum.dispose(inter);
+		
+    	let temp = Math.mul(consty,consty);
+		do ArbNum.dispose(consty);
+		let consty = temp;
+		
+		do consty.setSign(true);	
+     	
+     	let factorialNum = ArbNum.copy(c1);
+     	
+     	let term = ArbNum.copy(c1);
+     	
+		let result = ArbNum.copy(c1);
+		
+		
+		while( term.isGreater(delta) | term.isEqual(delta) ){
+		
+			let inter = Math.div(consty,factorialNum);
+			
+			let temp = Math.add(factorialNum,c1);
+			do ArbNum.dispose(factorialNum);
+			let factorialNum = temp;
+			
+			let temp = Math.div(inter,factorialNum);
+			do ArbNum.dispose(inter);
+			let inter = temp;
+			
+			let temp = Math.add(factorialNum,c1);
+			do ArbNum.dispose(factorialNum);
+			let factorialNum = temp;
+			
+			let temp = Math.mul(term,inter);
+			do ArbNum.dispose(term);
+			let term = temp;
+					
+			let temp = Math.add(result,term);
+			do ArbNum.dispose(result);
+			let result = temp;
+			
+			
+			
+			// 	** DONT DELETE THESE DEBUG LINES **
+				
+			//do Screen.clearScreen();
+			//do Output.moveCursor(0,0);
+			
+			//do Output.printString("inter: ");
+			//do Main.printNum(inter);
+			//do Output.println();
+			
+			//do Output.printString("factorialNum: ");
+			//do Main.printNum(factorialNum);
+			//do Output.println();
+			
+			//do Output.printString("term: ");
+			//do Main.printNum(term);
+			//do Output.println();
+			
+			//do Output.printString("result: ");
+			//do Main.printNum(result);
+			//do Output.println();
+			
+			//do Sys.wait(2000);
+		}
+		
+		let inter = Math.div(consty,factorialNum);
+		
+		let temp = Math.add(factorialNum,c1);
+		do ArbNum.dispose(factorialNum);
+		let factorialNum = temp;
+		
+		let temp = Math.div(inter,factorialNum);
+		do ArbNum.dispose(inter);
+		let inter = temp;
+		
+		let temp = Math.add(factorialNum,c1);
+		do ArbNum.dispose(factorialNum);
+		let factorialNum = temp;
+		
+		let temp = Math.mul(term,inter);
+		do ArbNum.dispose(term);
+		let term = temp;
+		
+		let temp = Math.add(result,term);
+		do ArbNum.dispose(result);
+		let result = temp;
+		
+		do ArbNum.dispose(pi2);
+		do ArbNum.dispose(term);
+		do ArbNum.dispose(inter);
+		do ArbNum.dispose(consty);
+		do ArbNum.dispose(factorialNum);
+		
+		return result;
+	}
+	
+	function ArbNum sin(ArbNum x){
+		var ArbNum temp, result;
+		if ( x.isEqual(c0) ){
+			return ArbNum.copy(c0);
+		}
+		if(x.isEqual(pi)){
+			return Math.sub(c0,c1);
+		}
+		let result = Math.div(pi,c2);
+		let temp = Math.sub(result, x);
+		do ArbNum.dispose(result);
+		let result = Math.cos(temp);
+		do ArbNum.dispose(temp);
+		if(x.getSign()){
+			do result.setSign(true);
+		}
+		return result;
+	}
+	
+	function ArbNum tan(ArbNum x){
+		var ArbNum sinx, cosx, result;
+		let cosx = Math.cos(x);
+		if (cosx.isEqual(c0)){
+			do ArbNum.dispose(cosx);
+			do Sys.error(3);
+		}
+		let sinx = Math.sin(x);
+		let result = Math.div(sinx, cosx);
+		do ArbNum.dispose(sinx);
+		do ArbNum.dispose(cosx);
+		return result;
+	}
+	
+}

@@ -1,0 +1,370 @@
+class ArbNum{
+	static int precision;	// Number of Digits
+	field bool sign;	// True indicates negative numbers
+	field int offset;	// Decimal is this digits from right of array
+	field Array digits;	// Of type int; index 0 is right most digit
+	
+	function void init(){
+		let precision = 16;
+		
+		return;
+	}
+	
+// Getter Methods:
+
+	method int getOffset(){
+		return offset;
+	}
+	
+	method int getSign(){
+		return sign;
+	}
+	
+	method int getDigits(){
+		return digits;
+	}
+	
+	function int getPrecision(){
+		return precision;
+	}
+
+// Setter Methods
+	
+	method void setSign(bool state) {
+		let sign = state;
+		
+		return;
+	}
+	
+	method void setOffset(int offsetIn) {
+		let offset = offsetIn;
+		return;
+	}
+
+// Constructor(s)
+	constructor ArbNum new(String num) {
+		// Create secondary offset (done)
+		// Create new Array (done)
+		// for each in Array, fill with zero (done)
+		// Remove non-number characters from string [0-9.-] (done)
+		// Check first char: (done)
+			// dealwithit (done)
+		// remove leading zeros (done)
+		// iterate through string
+			// check for decimal
+			// populate digit array
+		
+		var int i;
+		var int l;
+		
+		var Array numArray;
+		var int j;
+		var int c;
+		
+		let i = 0;
+		let j = precision;
+		let l = num.length();
+		let offset = precision - l;
+		let digits = Array.new(precision);
+
+		while(i<precision){
+			let digits[i] = 0;
+			let i = i + 1;
+		}
+		
+		let i = 0;
+		let sign = false;
+		
+		//if(num.charAt(0)=45){
+			//let sign = true;
+			//let i = i+1;
+		//}
+		
+		while((num.charAt(i)=48) & (i<l)){ 
+			let i = i+1;
+			let offset = offset + 1;
+			if( (num.length()=1) & (num.charAt(0)=48) ){
+				let digits[0] = 0;
+				let offset = precision;
+				//do String.dispose(num);
+				return this;
+			}
+		}
+		
+		
+		while((i < l) & (j>0)){
+			let c = num.charAt(i);
+			if (c = 46) {
+				let offset = j;
+			} else{
+				if(~(c=32)) {
+					let j = j-1;
+					let digits[j] = c - 48;
+				}
+			}
+			let i = i + 1;
+		}
+		
+		do String.dispose(num);
+				
+		return this;
+	}
+	
+	constructor ArbNum copy(ArbNum that){
+		// create new Array
+		// for each in array, copy from other array
+		// Copy the sign
+		// Copy the offset
+		// return
+		
+		var int i;
+		var Array otherDigits;
+	
+		let sign = that.getSign();
+		let offset = that.getOffset();
+		let digits = Array.new(precision);
+		let i = precision;
+		let otherDigits = that.getDigits();
+		while(i > 0){
+			let i = i - 1;
+			let digits[i] = otherDigits[i];
+		}
+		
+		return this;
+	}
+	
+	// let digits = Array.new(precision);
+	
+	// ** HELPER AND MATH FUNCTIONS **
+	
+	
+	method bool isGreater(ArbNum that){
+		var int i;
+		var Array thatDigits;
+		
+		if(~(offset = that.getOffset())){
+			return (offset < that.getOffset());
+		}
+		let i = precision - 1;
+		let thatDigits = that.getDigits();
+		
+		while( (digits[i]=thatDigits[i]) & (i>0) ){ 
+			let i = i-1;
+		}
+		return (digits[i] > thatDigits[i]);
+	}
+	
+	method bool isEqual(ArbNum that){
+		var int i;
+		var Array thatDigits;
+		
+		if(~(sign = that.getSign())){
+			return false;
+		}
+		
+		if(~(offset = that.getOffset())){
+			return false;
+		}
+		let i = precision - 1;
+		let thatDigits = that.getDigits();
+		
+		while( (digits[i]=thatDigits[i]) & (i>0) ){ 
+			let i = i-1;
+		}
+		
+		return ( digits[i]=thatDigits[i] );
+	}
+	
+	method void arrayAdd(ArbNum that){
+		// Declare variable(s) used for method, and loops. (Carry & I)
+		
+		var int carry, i;
+		var Array secondDigits;
+		
+		let secondDigits = that.getDigits();
+		
+		// Go through a loop, starting at far right of the numArray
+		let i = 0;
+		let carry = 0;
+		while(i<precision){
+			let digits[i] = digits[i] + secondDigits[i] + carry;
+			if(digits[i] > 9){
+				let digits[i] = digits[i] - 10;
+				let carry = 1;
+			}
+			else{
+				let carry = 0;
+			}
+			let i = i + 1;
+		}
+			// Add the two digits at same index, add carry if needed, if the sum is greater than 10, increae carry by 1
+			
+		// If at the end of loop, carry overflows, shift to right, and create new spot for carry
+		
+		if(carry = 0){
+			
+		} else{
+			do shiftRight();
+			let digits[precision-1] = carry;
+		}
+		
+		return;
+	}
+	
+	method void arraySub(ArbNum that){
+		var int i, borrow;
+		var Array secondDigits;
+		let i = 0;
+		let secondDigits = that.getDigits();
+		
+		while (i < precision) {
+			let digits[i] = digits[i] - secondDigits[i] - borrow;
+			if (digits[i] < 0) {
+				let digits[i] = digits[i] + 10;
+				let borrow = 1;
+			} else {
+				let borrow = 0;
+			}
+			let i = i + 1;
+		}
+		
+		while ((digits[precision - 1] = 0) & (offset < precision)) {
+			do shiftLeft();
+		}
+		
+		return;
+	}
+	
+	method void div10(){
+		var int i;
+						
+		let i = 0;
+		while(i<(precision-1)){
+			let digits[i] = digits[i+1];
+			let i = i + 1;
+		}
+		let digits[precision-1] = 0;	
+		
+		return;
+	}
+	
+	method void shiftRight(){
+		do div10();
+		let offset = offset - 1;
+		
+		return;
+	}
+	
+	method void mul10() {
+		var int i;
+		let i = precision - 1;
+		
+		while (i > 0) {		
+			let digits[i] = digits[i - 1];
+			let i = i - 1;
+		}
+		let digits[0] = 0;
+		
+		return;
+	}
+	
+	method void shiftLeft() {
+		do mul10();
+		let offset = offset + 1;
+		
+		return;
+	}
+	
+	function boolean isWholeNum(ArbNum that){
+		var int i;
+		var Array secondDigits;
+		let i = 0;
+		let secondDigits = that.getDigits();
+		
+		while(i<that.getOffset()){
+			if( ~(secondDigits[i]=0) ){
+				return false;
+			}
+			let i = i + 1;
+		}
+		return true;
+	}
+	
+	function boolean isEven(ArbNum that){
+		var int onesPlace;
+		var Array secondDigits;
+		let onesPlace = 0;
+		let secondDigits = that.getDigits();
+		let onesPlace = secondDigits[that.getOffset()];
+		return ((onesPlace=0) | (onesPlace=2) | (onesPlace=4) | (onesPlace=6) | (onesPlace=8));
+	}
+	
+	method String toString() {
+		// Local Variables
+		var String ret;
+		var int j;
+		
+		let j = precision;
+		
+		// Calculate the length of the string needed
+		
+		// Initialize the string
+		
+		let ret = String.new((precision + precision) + 6);
+
+		// Print the sign
+		
+		if(sign){
+			do ret.appendChar(45); // '-'
+		} else  {
+			do ret.appendChar(32); // ' '
+		}
+		// Check if offset equals precision
+		
+		if(offset = precision){
+			do ret.appendChar(46); // '.'
+		} else {
+			do ret.appendChar(32); // ' '
+		}
+		
+		while(j>0){
+			// print the digit
+			let j = j - 1;
+			do ret.appendChar(digits[j]+48);
+			// print the trailing space or decimal
+			
+			if(offset = j){
+				do ret.appendChar(46); // '.'
+			} else {
+				do ret.appendChar(32); // ' '
+			}
+		}
+		// append the offset in parantheses
+		
+		do ret.appendChar(40); // '('
+		// When the offset is greater than 9, separate into 2 numbers
+		
+		if(offset > 9){
+			do ret.appendChar(49); // '1'
+			do ret.appendChar(offset+38); // offset's ones place digit
+		}else{
+			do ret.appendChar(48); // '0'
+			do ret.appendChar(offset+48); // offset
+		}
+	    do ret.appendChar(41); // ')'
+	    
+	    //return the created string
+	    
+	    return ret;
+	}
+	
+	function void dispose(ArbNum the){
+		// Destory non-primitive fields
+		do Memory.deAlloc(the.getDigits());
+		// Destroy the reference
+		do Memory.deAlloc(the);
+		// Finally return
+		return;
+	}
+
+}

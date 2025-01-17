@@ -1,0 +1,293 @@
+class Main{
+	
+	static Array stack;
+	static int head, sLength;
+	static String s;
+	static char c;
+	static ArbNum x, y, r;
+	
+	function void main(){
+		let stack = Array.new(10);
+		let head = 0;
+		do ArbNum.init();
+		//let pi = ArbNum.new("-1000");
+		//let e = ArbNum.new("-30");
+		let s = String.new(ArbNum.getPrecision()+ArbNum.getPrecision()+2);
+		do Output.printString("0");
+		do Output.println();
+		
+		
+		while(true){
+			//do Main.debugPrint();
+			//do Output.printString(s);
+			
+			let c = Keyboard.readChar();
+			
+			let sLength = s.length();
+			
+			
+			// '+'
+			if( c = 43 ){
+				let head = head - 1;
+				let x = stack[head];
+				let head = head - 1;
+				let y = stack[head];
+				let r = Math.add(x, y);
+				let stack[head] = r;
+				let head = head + 1;
+				do ArbNum.dispose(x);
+				do ArbNum.dispose(y);
+			}
+			// '-'
+			if(c = 45){
+				let head = head - 1;
+				let x = stack[head];
+				let head = head - 1;
+				let y = stack[head];
+				let r = Math.sub(y, x);
+				let stack[head] = r;
+				let head = head + 1;
+				do ArbNum.dispose(x);
+				do ArbNum.dispose(y);
+			}
+			
+			// '*'
+			if(c = 42){
+				// Take two numbers off of stack
+				let head = head - 1;
+				let x = stack[head];
+				let head = head - 1;
+				let y = stack[head];
+				// Multiply
+				let r = Math.mul(x, y);
+				let stack[head] = r;
+				let head = head + 1;
+				//Dispose of variables
+				do ArbNum.dispose(x);
+				do ArbNum.dispose(y);
+			}
+			
+			// '/'
+			if(c = 47){
+				let head = head - 1;
+				let y = stack[head];
+				let head = head - 1;
+				let x = stack[head];
+				let r = Math.div(x,y);
+				let stack[head] = r;
+				let head = head + 1;
+				
+				do ArbNum.dispose(x);
+				do ArbNum.dispose(y);
+			}
+			// 'P'or pi
+			if(c = 80){
+				let stack[head] = Math.getpi();
+				let head = head + 1;
+			}
+			
+			// 'E' or e
+			if( c=69 ){
+				let stack[head] = Math.gete();
+				let head = head + 1;
+			}
+			
+			// 0-9
+			if((c < 58) & (c > 47)){
+				do s.appendChar(c);
+				
+				// blank space needed for physical display
+				do s.appendChar(32);
+			}
+			
+			// '.'
+			if(c = 46){
+				do s.eraseLastChar();
+				do s.appendChar(c);
+			}
+			
+			// 'w' for exp (for now, change to power later)
+//			if(c = 87){
+//				let head = head - 1;
+//				let x = stack[head];
+//				let r = Math.exp(x);
+//				let stack[head] = r;
+//				let head = head + 1
+//				do ArbNum.dispose(x);
+//			}
+			// 'L' for ln (just for testing, not a final key)
+//			if(c = 76){
+//				let head = head - 1;
+//				let x = stack[head];
+//				let r = Math.ln(x);
+//				let stack[head] = r;
+//				let head = head + 1;
+//				
+//				do ArbNum.dispose(x);
+//			}
+			
+			// 'R' for root
+			if(c = 82){
+				let head = head - 1;
+				let y = stack[head];
+				let head = head - 1;
+				let x = stack[head];
+				let r = Math.root(x,y);
+				let stack[head] = r;
+				let head = head + 1;
+				
+				do ArbNum.dispose(x);
+				do ArbNum.dispose(y);
+			}
+			
+			// '^' for power
+			if(c = 94){
+				let head = head - 1;
+				let y = stack[head];
+				let head = head - 1;
+				let x = stack[head];
+				let r = Math.pow(x,y);
+				let stack[head] = r;
+				let head = head + 1;
+				
+				do ArbNum.dispose(x);
+				do ArbNum.dispose(y);
+			}
+			
+			// 'C' for cos
+			if(c = 67){
+				let head = head - 1;
+				let x = stack[head];
+				let r = Math.cos(x);
+				let stack[head] = r;
+				let head = head + 1;
+				
+				do ArbNum.dispose(x);
+			}
+			
+			// 'S' for sin
+			if(c = 83){
+				let head = head - 1;
+				let x = stack[head];
+				let r = Math.sin(x);
+				let stack[head] = r;
+				let head = head + 1;
+				
+				do ArbNum.dispose(x);
+			}
+			
+			// 'T' for tan
+			if(c = 84){
+				let head = head - 1;
+				let x = stack[head];
+				let r = Math.tan(x);
+				let stack[head] = r;
+				let head = head + 1;
+				
+				do ArbNum.dispose(x);
+			}
+			
+			// return
+			if( c = 128 ){
+				if(sLength>0){
+					// Adds new ArbNum to the stack
+					let stack[head] = ArbNum.new(s);
+					let head = head + 1;
+					do String.dispose( s );
+					// Re-initializes string
+					let s = String.new(ArbNum.getPrecision()+ArbNum.getPrecision()+2);
+				}
+			}	
+			
+			// backspace
+			if( c = 129 ){
+				do s.eraseLastChar();
+				do s.eraseLastChar();
+			}
+			
+			// esc
+//			if( c = 140 ){
+//				while(head > 0){
+//					let head = head - 1;
+//					do ArbNum.dispose( stack[head] );
+//				}
+//				do String.dispose( s );
+//				let s = String.new(ArbNum.getPrecision()+ArbNum.getPrecision()+2);
+//			}
+			
+		}
+		
+	//	do Main.test();
+		//do Main.printNum(pi);
+		//do Main.printNum(e);
+		//do Output.println();
+		//let answer = Math.div(pi, e);
+		//do Main.printNum(answer);
+		//do ArbNum.dispose(answer);
+		//do Output.println();
+		//let answer = Math.sub(pi, e);
+		//do Main.printNum(answer);
+		return;
+	}
+	
+	function void printNum(ArbNum p){
+		var String s;
+		let s = p.toString();
+		do Output.printString( s );
+		do Output.println();
+		do String.dispose( s );
+		return;
+	}
+	
+//	function void debugPrint(){
+//		
+//		var int i;
+//		let i = 0;
+//		
+//		do Screen.clearScreen();
+//		do Output.moveCursor(0,0);
+//		
+//		while(i < head){
+//			do Main.printNum(stack[i]);
+//			let i = i + 1;
+//		}
+//		
+//		while(i < 10){
+//			do Output.println();
+//			let i = i + 1;
+//		}
+//		
+//		// Print out the delineator
+//		let i = 0;
+//		while( i < 40 ){
+//			do Output.printChar( 45 ); // '-'
+//			let i = i + 1;
+//		}
+//		do Output.println();
+//		return;
+//	}
+		
+	//function void test(){
+	//	var int i;
+	//	var ArbNum result;
+	//	var String s, b;
+	//	let s = "/                                              ";
+	//	let b = "                                               ";
+	//	//do Main.printNum(pi);
+	//	//do Main.printNum(e);
+	//	
+	//	while(i < 10){
+	//		let i = i + 1;
+	//		//let result = Math.div(pi,e);
+	//		do Output.printString(s);
+	//		do Output.println();
+	//		do Main.printNum(result);
+	//		do ArbNum.dispose(result);
+	//		do Output.printInt(i);
+	//		do Output.printString(b);
+	//		do Output.println();
+	//	}
+	//	return;
+	//}
+
+}
