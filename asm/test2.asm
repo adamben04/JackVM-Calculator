@@ -1,0 +1,39 @@
+// Bootstrap Code
+
+LXI H, FE00
+SPHL
+Main$main:
+MEMORY$init:
+SHLD LCL
+SHLD ARG
+SHLD THIS
+SHLD THAT
+XCHG
+PUSH D
+CALL MEMORY$init
+CALL Main$main
+Sys$halt:
+HLT
+SYS$error:
+XCHG
+MVI A, 0B
+OUT 02
+OUT 03
+OUT 04
+INR A
+OUT 07
+INR A
+OUT 06
+OUT 05
+MOV B, M
+MOV A, B
+ANI 0F
+OUT 00
+MOV A, B
+ANI F0
+RAR
+RAR
+RAR
+RAR
+OUT 01
+JMP Sys$halt
