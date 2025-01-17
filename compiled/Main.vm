@@ -1,0 +1,571 @@
+function Main.main 0
+push constant 10
+call Array.new 1
+pop static 0
+push constant 0
+pop static 1
+call ArbNum.init 0
+pop temp 0
+call ArbNum.getPrecision 0
+call ArbNum.getPrecision 0
+add
+push constant 2
+add
+call String.new 1
+pop static 3
+push constant 1
+call String.new 1
+push constant 48
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+label WHILE_EXP0
+push constant 0
+not
+not
+if-goto WHILE_END0
+call Keyboard.readChar 0
+pop static 4
+push static 3
+call String.length 1
+pop static 2
+push static 4
+push constant 43
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 6
+push static 5
+push static 6
+call Math.add 2
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+push static 6
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE0
+push static 4
+push constant 45
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 6
+push static 6
+push static 5
+call Math.sub 2
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+push static 6
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE1
+push static 4
+push constant 42
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 6
+push static 5
+push static 6
+call Math.mul 2
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+push static 6
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE2
+push static 4
+push constant 47
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 6
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 5
+push static 6
+call Math.div 2
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+push static 6
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE3
+push static 4
+push constant 80
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push static 1
+push static 0
+add
+call Math.getpi 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+label IF_FALSE4
+push static 4
+push constant 69
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push static 1
+push static 0
+add
+call Math.gete 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+label IF_FALSE5
+push static 4
+push constant 58
+lt
+push static 4
+push constant 47
+gt
+and
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push static 3
+push static 4
+call String.appendChar 2
+pop temp 0
+push static 3
+push constant 32
+call String.appendChar 2
+pop temp 0
+label IF_FALSE6
+push static 4
+push constant 46
+eq
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push static 3
+call String.eraseLastChar 1
+pop temp 0
+push static 3
+push static 4
+call String.appendChar 2
+pop temp 0
+label IF_FALSE7
+push static 4
+push constant 82
+eq
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 6
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 5
+push static 6
+call Math.root 2
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+push static 6
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE8
+push static 4
+push constant 94
+eq
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 6
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 5
+push static 6
+call Math.pow 2
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+push static 6
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE9
+push static 4
+push constant 67
+eq
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 5
+call Math.cos 1
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE10
+push static 4
+push constant 83
+eq
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 5
+call Math.sin 1
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE11
+push static 4
+push constant 84
+eq
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push static 1
+push constant 1
+sub
+pop static 1
+push static 1
+push static 0
+add
+pop pointer 1
+push that 0
+pop static 5
+push static 5
+call Math.tan 1
+pop static 7
+push static 1
+push static 0
+add
+push static 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 5
+call ArbNum.dispose 1
+pop temp 0
+label IF_FALSE12
+push static 4
+push constant 128
+eq
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push static 2
+push constant 0
+gt
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
+push static 1
+push static 0
+add
+push static 3
+call ArbNum.new 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 3
+call String.dispose 1
+pop temp 0
+call ArbNum.getPrecision 0
+call ArbNum.getPrecision 0
+add
+push constant 2
+add
+call String.new 1
+pop static 3
+label IF_FALSE14
+label IF_FALSE13
+push static 4
+push constant 129
+eq
+if-goto IF_TRUE15
+goto IF_FALSE15
+label IF_TRUE15
+push static 3
+call String.eraseLastChar 1
+pop temp 0
+push static 3
+call String.eraseLastChar 1
+pop temp 0
+label IF_FALSE15
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Main.printNum 1
+push argument 0
+call ArbNum.toString 1
+pop local 0
+push local 0
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push local 0
+call String.dispose 1
+pop temp 0
+push constant 0
+return

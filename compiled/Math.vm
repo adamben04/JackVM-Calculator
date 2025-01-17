@@ -1,0 +1,1687 @@
+function Math.init 0
+call ArbNum.init 0
+pop temp 0
+push constant 33
+call String.new 1
+push constant 51
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 52
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 53
+call String.appendChar 2
+push constant 57
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 54
+call String.appendChar 2
+push constant 53
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 53
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 57
+call String.appendChar 2
+push constant 55
+call String.appendChar 2
+push constant 57
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 52
+call String.appendChar 2
+push constant 54
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 54
+call String.appendChar 2
+push constant 52
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 55
+call String.appendChar 2
+push constant 57
+call String.appendChar 2
+push constant 53
+call String.appendChar 2
+call ArbNum.new 1
+pop static 0
+push constant 17
+call String.new 1
+push constant 50
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 55
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 52
+call String.appendChar 2
+push constant 53
+call String.appendChar 2
+push constant 57
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 52
+call String.appendChar 2
+push constant 53
+call String.appendChar 2
+call ArbNum.new 1
+pop static 1
+push constant 14
+call String.new 1
+push constant 48
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+call ArbNum.new 1
+pop static 6
+push constant 3
+call String.new 1
+push constant 48
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+call ArbNum.new 1
+pop static 2
+push constant 3
+call String.new 1
+push constant 49
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+call ArbNum.new 1
+pop static 3
+push constant 3
+call String.new 1
+push constant 50
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+call ArbNum.new 1
+pop static 4
+push constant 3
+call String.new 1
+push constant 51
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+call ArbNum.new 1
+pop static 5
+push constant 0
+return
+function Math.getpi 0
+push static 0
+call ArbNum.copy 1
+return
+function Math.gete 0
+push static 1
+call ArbNum.copy 1
+return
+function Math.getdelta 0
+push static 6
+call ArbNum.copy 1
+return
+function Math.add 4
+push argument 0
+call ArbNum.copy 1
+pop local 0
+push argument 1
+call ArbNum.copy 1
+pop local 1
+push constant 0
+pop local 3
+push local 0
+call ArbNum.getSign 1
+push local 1
+call ArbNum.getSign 1
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+label IF_FALSE0
+push local 0
+call ArbNum.getSign 1
+push local 1
+call ArbNum.getSign 1
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 1
+push local 0
+call Math.sub 2
+pop local 2
+push local 0
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE1
+push local 0
+call ArbNum.getSign 1
+not
+push local 1
+call ArbNum.getSign 1
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 1
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+push local 1
+call Math.sub 2
+pop local 2
+push local 1
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE2
+label WHILE_EXP0
+push local 0
+call ArbNum.getOffset 1
+push local 1
+call ArbNum.getOffset 1
+gt
+not
+if-goto WHILE_END0
+push local 0
+call ArbNum.shiftRight 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+label WHILE_EXP1
+push local 0
+call ArbNum.getOffset 1
+push local 1
+call ArbNum.getOffset 1
+lt
+not
+if-goto WHILE_END1
+push local 1
+call ArbNum.shiftRight 1
+pop temp 0
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push local 1
+call ArbNum.arrayAdd 2
+pop temp 0
+push local 3
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 0
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+label IF_FALSE3
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+return
+function Math.sub 4
+push argument 0
+call ArbNum.copy 1
+pop local 0
+push argument 1
+call ArbNum.copy 1
+pop local 1
+push constant 0
+pop local 3
+push local 0
+call ArbNum.getSign 1
+push local 1
+call ArbNum.getSign 1
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 1
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 1
+push local 0
+call Math.sub 2
+pop local 2
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE0
+push local 0
+call ArbNum.getSign 1
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 1
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+push local 1
+call Math.add 2
+pop local 2
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE1
+push local 1
+call ArbNum.getSign 1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 1
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+push local 1
+call Math.add 2
+pop local 2
+push local 2
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE2
+push local 1
+push local 0
+call ArbNum.isGreater 2
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 1
+push local 0
+call Math.sub 2
+pop local 2
+push local 2
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE3
+label WHILE_EXP0
+push local 0
+call ArbNum.getOffset 1
+push local 1
+call ArbNum.getOffset 1
+gt
+not
+if-goto WHILE_END0
+push local 0
+call ArbNum.shiftRight 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+label WHILE_EXP1
+push local 1
+call ArbNum.getOffset 1
+push local 0
+call ArbNum.getOffset 1
+gt
+not
+if-goto WHILE_END1
+push local 1
+call ArbNum.shiftRight 1
+pop temp 0
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push local 1
+call ArbNum.arraySub 2
+pop temp 0
+push local 3
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 0
+push local 0
+call ArbNum.getSign 1
+not
+call ArbNum.setSign 2
+pop temp 0
+label IF_FALSE4
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+return
+function Math.mul 6
+push argument 0
+push static 2
+call ArbNum.isEqual 2
+push argument 1
+push static 2
+call ArbNum.isEqual 2
+or
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 2
+call ArbNum.copy 1
+return
+label IF_FALSE0
+push argument 0
+call ArbNum.copy 1
+pop local 0
+push argument 1
+call ArbNum.getDigits 1
+pop local 5
+push static 2
+call ArbNum.copy 1
+pop local 1
+push local 0
+push local 0
+call ArbNum.getSign 1
+push argument 1
+call ArbNum.getSign 1
+eq
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 1
+push local 0
+call ArbNum.getSign 1
+call ArbNum.setSign 2
+pop temp 0
+call ArbNum.getPrecision 0
+pop local 4
+push local 0
+push local 0
+call ArbNum.getOffset 1
+push argument 1
+call ArbNum.getOffset 1
+add
+push constant 1
+add
+push local 4
+sub
+call ArbNum.setOffset 2
+pop temp 0
+label WHILE_EXP0
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 4
+push constant 1
+sub
+pop local 4
+push local 4
+push local 5
+add
+pop pointer 1
+push that 0
+pop local 3
+label WHILE_EXP1
+push local 3
+push constant 0
+gt
+not
+if-goto WHILE_END1
+push local 3
+push constant 1
+sub
+pop local 3
+push local 1
+push local 0
+call Math.add 2
+pop local 2
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+call ArbNum.div10 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+return
+function Math.div 9
+push argument 1
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 3
+call Sys.error 1
+pop temp 0
+label IF_FALSE0
+push argument 0
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push static 2
+call ArbNum.copy 1
+return
+label IF_FALSE1
+push argument 0
+call ArbNum.copy 1
+pop local 1
+push argument 1
+call ArbNum.copy 1
+pop local 2
+push static 2
+call ArbNum.copy 1
+pop local 0
+push local 0
+call ArbNum.getDigits 1
+pop local 8
+call ArbNum.getPrecision 0
+pop local 6
+push local 0
+push local 1
+call ArbNum.getSign 1
+push local 2
+call ArbNum.getSign 1
+eq
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 1
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 2
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push local 2
+call ArbNum.getOffset 1
+push local 6
+eq
+push local 1
+call ArbNum.getOffset 1
+push local 6
+eq
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 2
+push local 2
+call ArbNum.getOffset 1
+push constant 1
+sub
+call ArbNum.setOffset 2
+pop temp 0
+push local 1
+push local 1
+call ArbNum.getOffset 1
+push constant 1
+sub
+call ArbNum.setOffset 2
+pop temp 0
+label IF_FALSE2
+push local 6
+push constant 1
+sub
+pop local 6
+label WHILE_EXP0
+push local 2
+call ArbNum.getOffset 1
+push local 6
+lt
+push local 1
+call ArbNum.getOffset 1
+push local 6
+lt
+and
+not
+if-goto WHILE_END0
+push local 2
+push local 2
+call ArbNum.getOffset 1
+push constant 1
+add
+call ArbNum.setOffset 2
+pop temp 0
+push local 1
+push local 1
+call ArbNum.getOffset 1
+push constant 1
+add
+call ArbNum.setOffset 2
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 2
+call ArbNum.getDigits 1
+pop local 7
+label WHILE_EXP1
+push local 6
+push local 7
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto WHILE_END1
+push local 2
+call ArbNum.mul10 1
+pop temp 0
+push local 1
+push local 1
+call ArbNum.getOffset 1
+push constant 1
+sub
+call ArbNum.setOffset 2
+pop temp 0
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push local 1
+call ArbNum.getOffset 1
+call ArbNum.setOffset 2
+pop temp 0
+push local 1
+push local 6
+call ArbNum.setOffset 2
+pop temp 0
+push local 1
+call ArbNum.getDigits 1
+pop local 7
+push local 0
+call ArbNum.getDigits 1
+pop local 8
+push local 6
+push constant 1
+add
+pop local 4
+label WHILE_EXP2
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END2
+push local 4
+push constant 1
+sub
+pop local 4
+label WHILE_EXP3
+push local 1
+push local 2
+call ArbNum.isGreater 2
+push local 1
+push local 2
+call ArbNum.isEqual 2
+or
+not
+if-goto WHILE_END3
+push local 1
+push local 2
+call Math.sub 2
+pop local 3
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+pop local 1
+push local 1
+call ArbNum.getDigits 1
+pop local 7
+push local 4
+push local 8
+add
+push local 4
+push local 8
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto WHILE_EXP3
+label WHILE_END3
+push local 6
+push local 7
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 1
+call ArbNum.shiftLeft 1
+pop temp 0
+label IF_FALSE3
+push local 1
+push local 1
+call ArbNum.getOffset 1
+push constant 1
+sub
+call ArbNum.setOffset 2
+pop temp 0
+push local 4
+push local 6
+eq
+push local 4
+push local 8
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+and
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 0
+push local 0
+call ArbNum.getOffset 1
+push constant 1
+add
+call ArbNum.setOffset 2
+pop temp 0
+push local 4
+push constant 1
+add
+pop local 4
+label IF_FALSE4
+goto WHILE_EXP2
+label WHILE_END2
+push local 6
+push constant 1
+add
+pop local 6
+label WHILE_EXP4
+push local 0
+call ArbNum.getOffset 1
+push local 6
+gt
+not
+if-goto WHILE_END4
+push local 0
+call ArbNum.shiftRight 1
+pop temp 0
+goto WHILE_EXP4
+label WHILE_END4
+label WHILE_EXP5
+push local 0
+call ArbNum.getOffset 1
+push local 6
+lt
+push local 6
+push constant 1
+sub
+push local 8
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+and
+not
+if-goto WHILE_END5
+push local 0
+call ArbNum.shiftLeft 1
+pop temp 0
+goto WHILE_EXP5
+label WHILE_END5
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+return
+function Math.exp 5
+push argument 0
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 3
+call ArbNum.copy 1
+return
+label IF_FALSE0
+push argument 0
+push static 3
+call ArbNum.isEqual 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push static 1
+call ArbNum.copy 1
+return
+label IF_FALSE1
+push argument 0
+push static 3
+call Math.add 2
+pop local 0
+push argument 0
+call ArbNum.copy 1
+pop local 3
+push static 3
+call ArbNum.copy 1
+pop local 2
+label WHILE_EXP0
+push local 3
+push static 6
+call ArbNum.isGreater 2
+not
+if-goto WHILE_END0
+push local 2
+push static 3
+call Math.add 2
+pop local 1
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+pop local 2
+push argument 0
+push local 2
+call Math.div 2
+pop local 4
+push local 3
+push local 4
+call Math.mul 2
+pop local 1
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+pop local 3
+push local 4
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+push local 3
+call Math.add 2
+pop local 1
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+return
+function Math.ln 8
+push argument 0
+push static 2
+call ArbNum.isEqual 2
+push argument 0
+call ArbNum.getSign 1
+or
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 22
+call Sys.error 1
+pop temp 0
+label IF_FALSE0
+push argument 0
+push static 3
+call ArbNum.isEqual 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push static 2
+call ArbNum.copy 1
+return
+label IF_FALSE1
+push argument 0
+push static 1
+call ArbNum.isEqual 2
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push static 3
+call ArbNum.copy 1
+return
+label IF_FALSE2
+push argument 0
+call ArbNum.copy 1
+pop local 6
+push static 2
+call ArbNum.copy 1
+pop local 7
+label WHILE_EXP0
+push local 6
+push static 1
+call ArbNum.isGreater 2
+push local 6
+push static 1
+call ArbNum.isEqual 2
+or
+not
+if-goto WHILE_END0
+push local 6
+push static 1
+call Math.div 2
+pop local 4
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+pop local 6
+push local 7
+push static 3
+call Math.add 2
+pop local 4
+push local 7
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+pop local 7
+goto WHILE_EXP0
+label WHILE_END0
+push local 6
+push static 3
+call Math.add 2
+pop local 0
+push local 6
+push static 3
+call Math.sub 2
+pop local 4
+push local 4
+push local 0
+call Math.div 2
+pop local 3
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.copy 1
+pop local 0
+push local 3
+push local 3
+call Math.mul 2
+pop local 1
+push static 3
+call ArbNum.copy 1
+pop local 5
+push static 3
+call ArbNum.copy 1
+pop local 2
+label WHILE_EXP1
+push local 2
+push static 6
+call ArbNum.isGreater 2
+not
+if-goto WHILE_END1
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 5
+push static 4
+call Math.add 2
+pop local 4
+push local 5
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+pop local 5
+push local 0
+push local 1
+call Math.mul 2
+pop local 4
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+pop local 0
+push local 0
+push local 5
+call Math.div 2
+pop local 2
+push local 3
+push local 2
+call Math.add 2
+pop local 4
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+pop local 3
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+push static 4
+call Math.mul 2
+pop local 6
+push local 6
+push local 7
+call Math.add 2
+pop local 4
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 7
+call ArbNum.dispose 1
+pop temp 0
+push local 5
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+return
+function Math.pow 4
+push argument 0
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 2
+call ArbNum.copy 1
+return
+label IF_FALSE0
+push argument 1
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push static 3
+call ArbNum.copy 1
+return
+label IF_FALSE1
+push argument 0
+push static 3
+call ArbNum.isEqual 2
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push static 3
+call ArbNum.copy 1
+return
+label IF_FALSE2
+push argument 1
+push static 3
+call ArbNum.isEqual 2
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push argument 0
+call ArbNum.copy 1
+return
+label IF_FALSE3
+push argument 0
+call ArbNum.getSign 1
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push argument 0
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push argument 1
+call ArbNum.isWholeNum 1
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 0
+return
+label IF_FALSE5
+push argument 1
+call ArbNum.isEven 1
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push argument 0
+push argument 1
+call Math.pow 2
+return
+label IF_FALSE6
+push argument 0
+push argument 1
+call Math.pow 2
+pop local 2
+push local 2
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push local 2
+return
+label IF_FALSE4
+push argument 1
+call ArbNum.copy 1
+pop local 1
+push local 1
+call ArbNum.getSign 1
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push local 1
+push constant 0
+call ArbNum.setSign 2
+pop temp 0
+push argument 0
+push local 1
+call Math.pow 2
+pop local 0
+push static 3
+push local 0
+call Math.div 2
+pop local 2
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
+label IF_FALSE7
+push static 3
+call ArbNum.copy 1
+pop local 2
+label WHILE_EXP0
+push local 1
+push static 3
+call ArbNum.isGreater 2
+push local 1
+push static 3
+call ArbNum.isEqual 2
+or
+not
+if-goto WHILE_END0
+push local 2
+push argument 0
+call Math.mul 2
+pop local 0
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+pop local 2
+push local 1
+push static 3
+call Math.sub 2
+pop local 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push argument 0
+call Math.ln 1
+pop local 3
+push local 1
+push local 3
+call Math.mul 2
+pop local 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+pop local 1
+push local 1
+call Math.exp 1
+pop local 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+pop local 1
+push local 2
+push local 1
+call Math.mul 2
+pop local 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+return
+function Math.root 2
+push argument 0
+call ArbNum.getSign 1
+push argument 1
+push static 3
+call ArbNum.isEqual 2
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 4
+call Sys.error 1
+pop temp 0
+label IF_FALSE0
+push static 3
+push argument 1
+call Math.div 2
+pop local 0
+push argument 0
+push local 0
+call Math.pow 2
+pop local 1
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+return
+function Math.cos 7
+push static 0
+push static 4
+call Math.mul 2
+pop local 0
+push local 0
+push argument 0
+call ArbNum.getSign 1
+call ArbNum.setSign 2
+pop temp 0
+push argument 0
+call ArbNum.copy 1
+pop local 1
+label WHILE_EXP0
+push local 1
+push local 0
+call ArbNum.isGreater 2
+push local 1
+push local 0
+call ArbNum.isEqual 2
+or
+not
+if-goto WHILE_END0
+push local 1
+push local 0
+call Math.sub 2
+pop local 6
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push static 0
+push static 4
+call Math.div 2
+pop local 6
+push local 1
+push local 6
+call Math.div 2
+pop local 3
+push local 3
+push static 3
+call ArbNum.isEqual 2
+push local 3
+push static 5
+call ArbNum.isEqual 2
+or
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push static 2
+call ArbNum.copy 1
+return
+label IF_FALSE0
+push local 3
+push static 4
+call ArbNum.isEqual 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push static 2
+push static 3
+call Math.sub 2
+return
+label IF_FALSE1
+push local 1
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push static 3
+call ArbNum.copy 1
+return
+label IF_FALSE2
+push local 6
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+push local 1
+call Math.mul 2
+pop local 6
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 1
+push local 1
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+push static 3
+call ArbNum.copy 1
+pop local 2
+push static 3
+call ArbNum.copy 1
+pop local 4
+push static 3
+call ArbNum.copy 1
+pop local 5
+label WHILE_EXP1
+push local 4
+push static 6
+call ArbNum.isGreater 2
+push local 4
+push static 6
+call ArbNum.isEqual 2
+or
+not
+if-goto WHILE_END1
+push local 1
+push local 2
+call Math.div 2
+pop local 3
+push local 2
+push static 3
+call Math.add 2
+pop local 6
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 2
+push local 3
+push local 2
+call Math.div 2
+pop local 6
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 3
+push local 2
+push static 3
+call Math.add 2
+pop local 6
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 2
+push local 4
+push local 3
+call Math.mul 2
+pop local 6
+push local 4
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 4
+push local 5
+push local 4
+call Math.add 2
+pop local 6
+push local 5
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 5
+goto WHILE_EXP1
+label WHILE_END1
+push local 1
+push local 2
+call Math.div 2
+pop local 3
+push local 2
+push static 3
+call Math.add 2
+pop local 6
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 2
+push local 3
+push local 2
+call Math.div 2
+pop local 6
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 3
+push local 2
+push static 3
+call Math.add 2
+pop local 6
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 2
+push local 4
+push local 3
+call Math.mul 2
+pop local 6
+push local 4
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 4
+push local 5
+push local 4
+call Math.add 2
+pop local 6
+push local 5
+call ArbNum.dispose 1
+pop temp 0
+push local 6
+pop local 5
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 4
+call ArbNum.dispose 1
+pop temp 0
+push local 3
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+call ArbNum.dispose 1
+pop temp 0
+push local 5
+return
+function Math.sin 2
+push argument 0
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 2
+call ArbNum.copy 1
+return
+label IF_FALSE0
+push argument 0
+push static 0
+call ArbNum.isEqual 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push static 2
+push static 3
+call Math.sub 2
+return
+label IF_FALSE1
+push static 0
+push static 4
+call Math.div 2
+pop local 1
+push local 1
+push argument 0
+call Math.sub 2
+pop local 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 0
+call Math.cos 1
+pop local 1
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push argument 0
+call ArbNum.getSign 1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 1
+push constant 0
+not
+call ArbNum.setSign 2
+pop temp 0
+label IF_FALSE2
+push local 1
+return
+function Math.tan 3
+push argument 0
+call Math.cos 1
+pop local 1
+push local 1
+push static 2
+call ArbNum.isEqual 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push constant 3
+call Sys.error 1
+pop temp 0
+label IF_FALSE0
+push argument 0
+call Math.sin 1
+pop local 0
+push local 0
+push local 1
+call Math.div 2
+pop local 2
+push local 0
+call ArbNum.dispose 1
+pop temp 0
+push local 1
+call ArbNum.dispose 1
+pop temp 0
+push local 2
+return
